@@ -1,0 +1,18 @@
+Microservice - contains all the codes required to to make one feature of an app correctly
+
+Data in Microservice:
+    - Each service gets its own database
+    - One service will never access database of other services
+        * This will make one service independent to other services
+        * Avoid services to crash due to error/changes in a specific service
+        * Example:  Service A   -------> DataBase A
+                                |
+                                |       |---------------|
+                                |       |               |
+                                ---X--->|               |
+                                        |  DataBase B   |
+                    Service B   ------->|               |
+                                        |---------------|
+                    Service C   -------> DataBase C
+                    Service D   -------> DataBase D
+    
