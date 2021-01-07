@@ -21,6 +21,11 @@ app.post("/events", (req, res) => {
     //Moderation Services
     axios.post("http://localhost:4003/events", event);
 
+    // Virtual machines
+    // axios.post("http://localhost:4006/events", event);
+
+    // axios.post("http://localhost:4007/events", event);
+
     res.send({ status: "All OK" });
 });
 
