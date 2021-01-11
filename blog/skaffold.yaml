@@ -1,0 +1,58 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+    kubectl:
+        manifests:
+            - ./infra/k8s/*
+build:
+    local:
+        push: false
+    artifacts:
+        - image: adit2801/client
+          context: client
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: "src/**/*.js"
+                    dest: .
+        - image: adit2801/comments
+          context: comments
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: "*.js"
+                    dest: .
+        - image: adit2801/event-bus
+          context: event-bus
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: "*.js"
+                    dest: .
+        - image: adit2801/moderation
+          context: moderation
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: "*.js"
+                    dest: .
+        - image: adit2801/posts
+          context: posts
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: "*.js"
+                    dest: .
+        - image: adit2801/query
+          context: query
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: "*.js"
+                    dest: .
