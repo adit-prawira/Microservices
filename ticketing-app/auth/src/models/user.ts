@@ -30,6 +30,8 @@ const userSchema = new mongoose.Schema(
         },
     },
     {
+        // Do not show password, .__v responses and change
+        // object of _id to id
         toJSON: {
             transform(doc, ret) {
                 ret.id = ret._id;
