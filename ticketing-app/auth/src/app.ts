@@ -18,7 +18,10 @@ app.use(json());
 app.use(
     cookieSession({
         signed: false,
-        secure: true,
+
+        // Check if the software is being tested in secure
+        // environment(https) or not(http)
+        secure: process.env.NODE_ENV !== "test",
     })
 );
 
