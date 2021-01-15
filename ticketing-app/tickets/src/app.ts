@@ -4,11 +4,11 @@ import { json } from "body-parser";
 import cookieSession from "cookie-session";
 import { errorHandler, NotFoundError, currentUser } from "@apticketz/common";
 import { createTicketRouter } from "./routes/new";
+import { showTicketRouter } from "./routes/show";
 
 const app = express();
 
 app.set("trust proxy", 1);
-
 app.use(json());
 app.use(
     cookieSession({
@@ -20,11 +20,12 @@ app.use(
     })
 );
 
+// Authenticate if a user is signed in
 app.use(currentUser);
 
 // Use router to create new tickets
 app.use(createTicketRouter);
-
+app.use(showTicketRouter);
 // throw an error for any unidentified url
 app.all("*", async () => {
     throw new NotFoundError();
