@@ -16,7 +16,6 @@ const SignIn = () => {
     });
     const onSubmit = async (event) => {
         event.preventDefault();
-
         await doRequest();
     };
 
