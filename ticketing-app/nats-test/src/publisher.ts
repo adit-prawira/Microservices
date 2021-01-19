@@ -10,17 +10,6 @@ const stan = nats.connect("ticketing", "abc", {
 stan.on("connect", async () => {
     console.log("Publisher connected to NATS");
 
-    // const data = JSON.stringify({
-    //     id: "123",
-    //     title: "concert",
-    //     price: 20,
-    // });
-
-    // //Publishing data to be accessible
-    // stan.publish("ticket:created", data, () => {
-    //     console.log("Event published");
-    // });
-
     const publisher = new TicketCreatedPublisher(stan);
     try {
         await publisher.publish({

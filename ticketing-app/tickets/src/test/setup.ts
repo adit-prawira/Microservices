@@ -11,6 +11,8 @@ declare global {
         }
     }
 }
+// Globally connect all test files to NATS streaming server
+jest.mock("../nats-wrapper.ts");
 
 let mongo: any;
 beforeAll(async () => {
@@ -26,6 +28,8 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
+    // Reset mocks data between every single test
+    jest.clearAllMocks();
     const collections = await mongoose.connection.db.collections();
     for (let collection of collections) {
         await collection.deleteMany({});
