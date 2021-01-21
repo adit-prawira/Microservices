@@ -10,6 +10,7 @@ import {
 import { Ticket } from "../models/ticket";
 import { TicketUpdatedPublisher } from "../events/publishers/ticket-updated-publisher";
 import { natsWrapper } from "../nats-wrapper";
+import { BadRequestError } from "@apticketz/common";
 
 const router = express.Router();
 
@@ -29,6 +30,9 @@ router.put(
             throw new NotFoundError();
         }
 
+        if (ticket.orderId) {
+            throw new BadRequestError("Cannot edit a reserved ticket");
+        }
         // Making sure that the request to edit the ticket's metadata
         // is done by the owner of the ticket
         if (ticket.userId !== req.currentUser!.id) {
@@ -43,7 +47,7 @@ router.put(
             title: ticket.title,
             price: ticket.price,
             userId: ticket.userId,
-            version: ticket.version
+            version: ticket.version,
         });
         res.send(ticket);
     }
