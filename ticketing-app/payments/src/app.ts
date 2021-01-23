@@ -3,7 +3,7 @@ import "express-async-errors";
 import { json } from "body-parser";
 import cookieSession from "cookie-session";
 import { errorHandler, NotFoundError, currentUser } from "@apticketz/common";
-
+import { createChargeRouter } from "./routes/new";
 const app = express();
 
 app.set("trust proxy", 1);
@@ -20,7 +20,7 @@ app.use(
 
 // Authenticate if a user is signed in
 app.use(currentUser);
-
+app.use(createChargeRouter);
 // throw an error for any unidentified url
 app.all("*", async (req, res) => {
     throw new NotFoundError();
