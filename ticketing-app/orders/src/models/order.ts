@@ -3,8 +3,6 @@ import { OrderStatus } from "@apticketz/common";
 import { TicketDoc } from "./ticket";
 import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 
-export { OrderStatus };
-
 interface OrderAttrs {
     userId: string;
     status: OrderStatus;
@@ -53,12 +51,14 @@ const orderSchema = new mongoose.Schema(
         },
     }
 );
+
 orderSchema.set("versionKey", "version");
 orderSchema.plugin(updateIfCurrentPlugin);
+
 orderSchema.statics.build = (attrs: OrderAttrs) => {
     return new Order(attrs);
 };
 
 const Order = mongoose.model<OrderDoc, OrderModel>("Order", orderSchema);
 
-export { Order };
+export { Order, OrderStatus };
