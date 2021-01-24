@@ -10,7 +10,7 @@ const OrderShow = ({ order, currentUser }) => {
         body: {
             orderId: order.id,
         },
-        onSuccess: (payment) => console.log(),
+        onSuccess: () => Router.push("/orders"),
     });
     useEffect(() => {
         const findTimeLeft = () => {
