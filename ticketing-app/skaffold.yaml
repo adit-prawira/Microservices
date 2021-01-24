@@ -22,7 +22,7 @@ build:
               dockerfile: Dockerfile
           sync:
               manual:
-                  - src: "**/*.ts"
+                  - src: "**/*.js"
                     dest: .
         - image: adit2801/tickets
           context: tickets
