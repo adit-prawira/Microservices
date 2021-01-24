@@ -11,8 +11,9 @@ import {
 import { stripe } from "../stripe";
 import { Order } from "../models/order";
 import { Payment } from "../models/payment";
-import { natsWrapper } from "../nats-wrapper";
 import { PaymentCreatedPublisher } from "../events/publishers/payment-created-publisher";
+import { natsWrapper } from "../nats-wrapper";
+
 const router = express.Router();
 
 router.post(
@@ -50,6 +51,7 @@ router.post(
             orderId: payment.orderId,
             stripeId: payment.stripeId,
         });
+
         res.status(201).send({ id: payment.id });
     }
 );
